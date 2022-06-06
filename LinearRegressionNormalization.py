@@ -4,7 +4,12 @@ import matplotlib.pyplot as plt
 
 #Data Collection and EDA
 cars=pd.read_csv('Toyota.csv',index_col=0,na_values=['??',"????"])
-cars.dropna(axis=0,inplace=True)
+cars['Age'].fillna(cars['Age'].mean(),inplace=True)
+cars['KM'].fillna(cars['KM'].mean(),inplace=True)
+cars['FuelType'].fillna(cars['FuelType'].mode()[0],inplace=True)
+cars['HP'].fillna(cars['HP'].mean(),inplace=True)
+cars.drop('MetColor',axis=1,inplace=True)
+
 price=np.array(cars['Price'])
 
 #Data Preprocessing
@@ -37,9 +42,6 @@ fueltype=featurescaling(fueltype)
 hp=np.array(cars["HP"])
 hp=featurescaling(hp)
 
-mc=np.array(cars["MetColor"])
-mc=featurescaling(mc)
-
 engtype=np.array(cars["Automatic"])
 engtype=featurescaling(engtype)
 
@@ -50,7 +52,7 @@ cc=featurescaling(cc)
 weight=np.array(cars["Weight"])
 weight=featurescaling(weight)
 
-lbd=0.170000011
+lbd=0.2
 
 X=np.array([[1,age[k],distance[k],fueltype[k],hp[k],engtype[k],cc[k],weight[k]] for k in range(n)])
 theta=np.dot(np.linalg.inv(np.dot(X.T,X)+lbd*np.identity(8)),np.dot(X.T,price))
