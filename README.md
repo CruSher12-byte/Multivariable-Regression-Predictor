@@ -1,2 +1,3 @@
-# linear-regression-toyota
-A simple Linear Regression model to predict price of a used car from a dataset of around 1400 tuples.
+# Multivariate Prediction
+
+Created a Linear Regression Predictor using Pandas and Numpy for EDA and Skilearn for creating the model which predicts the selling price of a second-hand used car based on data from previous 1400 sales.
