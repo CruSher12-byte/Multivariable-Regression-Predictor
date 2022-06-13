@@ -46,8 +46,6 @@ df['HP']=featurescaling(df['HP'])
 df['CC']=featurescaling(df['CC'])
 df['Weight']=featurescaling(df['Weight'])
 
-print(df.sample(10))
-
 #Creating target and predictor dataframes
 X=df.drop('Price',axis=1)
 y=df['Price']
