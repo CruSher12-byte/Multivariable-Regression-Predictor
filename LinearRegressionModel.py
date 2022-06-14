@@ -2,11 +2,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression,Ridge,Lasso
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor, kneighbors_graph
 import seaborn as sns
 import warnings
-
-from sqlalchemy import column
 
 warnings.filterwarnings("ignore")
 
@@ -50,13 +50,38 @@ df['Weight']=featurescaling(df['Weight'])
 X=df.drop('Price',axis=1)
 y=df['Price']
 
-#Applying Linear Regression
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 64)
+#Splitting data into train and test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 42)
+
+#Applying Regression Models
 
 lr = LinearRegression()
 lr.fit(X_train, y_train)
 
 print('Linear Regression Train Score is : ' , lr.score(X_train, y_train))
 print('Linear Regression Test Score is : ' , lr.score(X_test, y_test))
-print('Linear Regression Coefficients are : ' , lr.coef_)
-print('Linear Regression intercept is : ' , lr.intercept_)
+
+clf=Ridge(alpha=0.1)
+clf.fit(X_train,y_train)
+
+print('\nRidge Regression Train Score is : ' , clf.score(X_train, y_train))
+print('Ridge Regression Test Score is : ' , clf.score(X_test, y_test))
+
+ls=Lasso(alpha=0.1)
+ls.fit(X_train,y_train)
+
+print('\nLasso Regression Train Score is : ' , ls.score(X_train, y_train))
+print('Lasso Regression Test Score is : ' , ls.score(X_test, y_test))
+
+dt=DecisionTreeRegressor(max_depth=5)
+dt.fit(X_train,y_train)
+
+print("\nDecision Tree Regression Train Score is : " , dt.score(X_train, y_train))
+print("Decision Tree Regression Test Score is : " , dt.score(X_test, y_test))
+
+knn=KNeighborsRegressor(n_neighbors=10)
+knn.fit(X_train,y_train)
+
+print("\nKNN Regression Train Score is : " , knn.score(X_train, y_train))
+print("KNN Regression Test Score is : " , knn.score(X_test, y_test))
+
