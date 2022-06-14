@@ -29,7 +29,6 @@ val=df.values
 val_scaled=scaler.fit_transform(val)
 df=pd.DataFrame(val_scaled,columns=df.columns)
 
-
 #Creating target and predictor dataframes
 X=df.drop('Price',axis=1)
 y=df['Price']
