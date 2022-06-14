@@ -13,10 +13,8 @@ df['Age'].fillna(df['Age'].mean(),inplace=True)
 df['KM'].fillna(df['KM'].mean(),inplace=True)
 df['FuelType'].fillna(df['FuelType'].mode()[0],inplace=True)
 df['HP'].fillna(df['HP'].mean(),inplace=True)
-
-#Dropping unnecessary columns
-df.drop('MetColor',axis=1,inplace=True)
-df.drop('Doors',axis=1,inplace=True)
+df['MetColor'].fillna(df['MetColor'].mode()[0],inplace=True)
+df['Doors']=df['Doors'].map({'three':3,'five':5,'four':4,'3':3,'5':5,'4':4,'2':2})
 
 #Encoding the FuelType feature
 le = preprocessing.LabelEncoder()
@@ -56,7 +54,7 @@ ls.fit(X_train,y_train)
 print('\nLasso Regression Train Score is : ' , ls.score(X_train, y_train))
 print('Lasso Regression Test Score is : ' , ls.score(X_test, y_test))
 
-dt=DecisionTreeRegressor(max_depth=8)
+dt=DecisionTreeRegressor(max_depth=6)
 dt.fit(X_train,y_train)
 
 print("\nDecision Tree Regression Train Score is : " , dt.score(X_train, y_train))
