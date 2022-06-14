@@ -1,29 +1,9 @@
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression,Ridge,Lasso
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsRegressor
-import seaborn as sns
-import warnings
-
-warnings.filterwarnings("ignore")
-def featurescaling(arr):
-    return ((arr-np.min(arr))/(np.max(arr)-np.min(arr)))
-
-def encoding(arr):
-    for i in range(0,len(arr)):
-        if arr[i]=="Petrol":
-            arr[i]=4
-        elif arr[i]=="Diesel":
-            arr[i]=3
-        elif arr[i]=="CNG":
-            arr[i]=2
-        else:
-            arr[i]=1
-    return featurescaling(arr)
 
 #Data Collection and Cleaning
 df=pd.read_csv('Toyota.csv',index_col=0,na_values=['??',"????"])
