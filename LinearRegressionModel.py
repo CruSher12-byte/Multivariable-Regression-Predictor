@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression,Ridge,Lasso
 from sklearn.tree import DecisionTreeRegressor
@@ -9,7 +10,6 @@ import seaborn as sns
 import warnings
 
 warnings.filterwarnings("ignore")
-
 def featurescaling(arr):
     return ((arr-np.min(arr))/(np.max(arr)-np.min(arr)))
 
@@ -38,13 +38,17 @@ df['HP'].fillna(df['HP'].mean(),inplace=True)
 df.drop('MetColor',axis=1,inplace=True)
 df.drop('Doors',axis=1,inplace=True)
 
-#Scaling and Encoding the required features 
-df['Age']=featurescaling(df['Age'])
-df['KM']=featurescaling(df['KM'])
-df['FuelType']=encoding(df['FuelType'])
-df['HP']=featurescaling(df['HP'])
-df['CC']=featurescaling(df['CC'])
-df['Weight']=featurescaling(df['Weight'])
+#Encoding the FuelType feature
+le = preprocessing.LabelEncoder()
+le.fit(["Petrol","Diesel","CNG"])
+df["FuelType"]=le.transform(df["FuelType"]) 
+
+#Scaling the features
+scaler=preprocessing.MinMaxScaler()
+val=df.values
+val_scaled=scaler.fit_transform(val)
+df=pd.DataFrame(val_scaled,columns=df.columns)
+
 
 #Creating target and predictor dataframes
 X=df.drop('Price',axis=1)
@@ -67,7 +71,7 @@ clf.fit(X_train,y_train)
 print('\nRidge Regression Train Score is : ' , clf.score(X_train, y_train))
 print('Ridge Regression Test Score is : ' , clf.score(X_test, y_test))
 
-ls=Lasso(alpha=0.1)
+ls=Lasso(alpha=0.0005)
 ls.fit(X_train,y_train)
 
 print('\nLasso Regression Train Score is : ' , ls.score(X_train, y_train))
