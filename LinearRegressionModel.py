@@ -65,7 +65,7 @@ lr.fit(X_train, y_train)
 print('Linear Regression Train Score is : ' , lr.score(X_train, y_train))
 print('Linear Regression Test Score is : ' , lr.score(X_test, y_test))
 
-clf=Ridge(alpha=0.1)
+clf=Ridge(alpha=0.2)
 clf.fit(X_train,y_train)
 
 print('\nRidge Regression Train Score is : ' , clf.score(X_train, y_train))
@@ -77,13 +77,13 @@ ls.fit(X_train,y_train)
 print('\nLasso Regression Train Score is : ' , ls.score(X_train, y_train))
 print('Lasso Regression Test Score is : ' , ls.score(X_test, y_test))
 
-dt=DecisionTreeRegressor(max_depth=5)
+dt=DecisionTreeRegressor(max_depth=8)
 dt.fit(X_train,y_train)
 
 print("\nDecision Tree Regression Train Score is : " , dt.score(X_train, y_train))
 print("Decision Tree Regression Test Score is : " , dt.score(X_test, y_test))
 
-knn=KNeighborsRegressor(n_neighbors=10)
+knn=KNeighborsRegressor(n_neighbors=8)
 knn.fit(X_train,y_train)
 
 print("\nKNN Regression Train Score is : " , knn.score(X_train, y_train))
