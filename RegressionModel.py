@@ -8,13 +8,15 @@ from sklearn.neighbors import KNeighborsRegressor
 #Data Collection and Cleaning
 df=pd.read_csv('Toyota.csv',index_col=0,na_values=['??',"????"])
 
-#Filling missing values
-df['Age'].fillna(df['Age'].mean(),inplace=True)
+#Filling missing dfues
+df['Age'].fillna(df['Age'].median(),inplace=True)
 df['KM'].fillna(df['KM'].mean(),inplace=True)
 df['FuelType'].fillna(df['FuelType'].mode()[0],inplace=True)
 df['HP'].fillna(df['HP'].mean(),inplace=True)
 df['MetColor'].fillna(df['MetColor'].mode()[0],inplace=True)
-df['Doors']=df['Doors'].map({'three':3,'five':5,'four':4,'3':3,'5':5,'4':4,'2':2})
+df['Doors']=df['Doors'].replace('three',3)
+df['Doors']=df['Doors'].replace('four',4)
+df['Doors']=df['Doors'].replace('five',5)
 
 #Encoding the FuelType feature
 le = preprocessing.LabelEncoder()
@@ -65,4 +67,3 @@ knn.fit(X_train,y_train)
 
 print("\nKNN Regression Train Score is : " , knn.score(X_train, y_train))
 print("KNN Regression Test Score is : " , knn.score(X_test, y_test))
-
