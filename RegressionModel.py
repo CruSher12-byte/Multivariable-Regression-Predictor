@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsRegressor
 
 #Data Collection and Cleaning
-df=pd.read_csv('Toyota.csv',index_col=0,na_values=['??',"????"])
+df=pd.read_csv('CarSales.csv',index_col=0,na_values=['??',"????"])
 
 #Filling missing dfues
 df['Age'].fillna(df['Age'].median(),inplace=True)
