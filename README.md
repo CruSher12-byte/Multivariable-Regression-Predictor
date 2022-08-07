@@ -7,4 +7,4 @@ Created a Regression Predictor using Pandas and Matplotlib with Seaborn for EDA 
 ![Pandas](https://img.shields.io/badge/Pandas-2C2D72?style=for-the-badge&logo=pandas&logoColor=white)
 ![NumPy](https://img.shields.io/badge/Numpy-777BB4?style=for-the-badge&logo=numpy&logoColor=white)
 
-## [Kaggle URL](https://www.kaggle.com/code/thatguy69420/basic-multivariable-regression-with-detailed-eda)
+### [Kaggle URL](https://www.kaggle.com/code/thatguy69420/basic-multivariable-regression-with-detailed-eda)
